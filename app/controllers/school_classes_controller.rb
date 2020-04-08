@@ -1,5 +1,5 @@
-class SchoolClassesController < ApplicationController
 
+class SchoolClassesController < ApplicationController
     def index
         @school_classes = SchoolClass.all
     end
@@ -20,16 +20,17 @@ class SchoolClassesController < ApplicationController
 
     def edit
         @school_class = SchoolClass.find(params[:id])
-        @school_class.update(schoolclass_params(:title, :room_number))
-        redirect_to school_class_path(@school_class)
     end
 
     def update
         @school_class = SchoolClass.find(params[:id])
+        @school_class.update(schoolclass_params(:id, :title, :room_number))
+        redirect_to school_class_path(@school_class)
     end
 
     private
     def schoolclass_params(*args)
+        #raise params.inspect
 		params.require(:school_class).permit(*args)
 	end
 end
